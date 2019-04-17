@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_csv2rdf" default="compile.module.csv2rdf">
+  <dirname property="module.csv2rdf.basedir" file="${ant.file.module_csv2rdf}"/>
+  
+  <property name="module.jdk.home.csv2rdf" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.csv2rdf" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.csv2rdf" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.csv2rdf" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="csv2rdf.output.dir" value="${module.csv2rdf.basedir}/bin"/>
+  <property name="csv2rdf.testoutput.dir" value="${module.csv2rdf.basedir}/bin"/>
+  
+  <path id="csv2rdf.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="csv2rdf.module.production.classpath">
+    <path refid="${module.jdk.classpath.csv2rdf}"/>
+    <pathelement location="${basedir}/lib/opencsv-2.0.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-jdk14-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/guava-15.0.jar"/>
+    <pathelement location="${basedir}/lib/airline-0.7.3.jar"/>
+    <pathelement location="${basedir}/lib/openrdf-sesame-2.7.10-onejar.jar"/>
+    <pathelement location="${basedir}/lib/javax.inject-1.jar"/>
+    <pathelement location="${basedir}/lib/commons-io-2.4.jar"/>
+  </path>
+  
+  <path id="csv2rdf.runtime.production.module.classpath">
+    <pathelement location="${csv2rdf.output.dir}"/>
+    <pathelement location="${basedir}/lib/opencsv-2.0.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-jdk14-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/guava-15.0.jar"/>
+    <pathelement location="${basedir}/lib/airline-0.7.3.jar"/>
+    <pathelement location="${basedir}/lib/openrdf-sesame-2.7.10-onejar.jar"/>
+    <pathelement location="${basedir}/lib/javax.inject-1.jar"/>
+    <pathelement location="${basedir}/lib/commons-io-2.4.jar"/>
+  </path>
+  
+  <path id="csv2rdf.module.classpath">
+    <pathelement location="${csv2rdf.output.dir}"/>
+    <path refid="${module.jdk.classpath.csv2rdf}"/>
+    <pathelement location="${basedir}/lib/opencsv-2.0.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-jdk14-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/guava-15.0.jar"/>
+    <pathelement location="${basedir}/lib/airline-0.7.3.jar"/>
+    <pathelement location="${basedir}/lib/openrdf-sesame-2.7.10-onejar.jar"/>
+    <pathelement location="${basedir}/lib/javax.inject-1.jar"/>
+    <pathelement location="${basedir}/lib/commons-io-2.4.jar"/>
+  </path>
+  
+  <path id="csv2rdf.runtime.module.classpath">
+    <pathelement location="${csv2rdf.output.dir}"/>
+    <pathelement location="${basedir}/lib/opencsv-2.0.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-jdk14-1.6.1.jar"/>
+    <pathelement location="${basedir}/lib/guava-15.0.jar"/>
+    <pathelement location="${basedir}/lib/airline-0.7.3.jar"/>
+    <pathelement location="${basedir}/lib/openrdf-sesame-2.7.10-onejar.jar"/>
+    <pathelement location="${basedir}/lib/javax.inject-1.jar"/>
+    <pathelement location="${basedir}/lib/commons-io-2.4.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.csv2rdf">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.csv2rdf">
+    <patternset refid="excluded.from.module.csv2rdf"/>
+  </patternset>
+  
+  <path id="csv2rdf.module.sourcepath">
+    <dirset dir="${module.csv2rdf.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.csv2rdf" depends="compile.module.csv2rdf.production,compile.module.csv2rdf.tests" description="Compile module csv2rdf"/>
+  
+  <target name="compile.module.csv2rdf.production" depends="register.custom.compilers" description="Compile module csv2rdf; production classes">
+    <mkdir dir="${csv2rdf.output.dir}"/>
+    <javac2 destdir="${csv2rdf.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.csv2rdf}/javac">
+      <compilerarg line="${compiler.args.csv2rdf}"/>
+      <bootclasspath refid="csv2rdf.module.bootclasspath"/>
+      <classpath refid="csv2rdf.module.production.classpath"/>
+      <src refid="csv2rdf.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.csv2rdf"/>
+    </javac2>
+    
+    <copy todir="${csv2rdf.output.dir}">
+      <fileset dir="${module.csv2rdf.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.csv2rdf.tests" depends="register.custom.compilers,compile.module.csv2rdf.production" description="compile module csv2rdf; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.csv2rdf" description="cleanup module">
+    <delete dir="${csv2rdf.output.dir}"/>
+    <delete dir="${csv2rdf.testoutput.dir}"/>
+  </target>
+</project>
