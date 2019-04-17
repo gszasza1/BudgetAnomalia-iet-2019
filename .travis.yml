@@ -1,6 +1,8 @@
 dist: xenial
 language: java
-install: ant deps
+before_install: 
+sudo apt-get install ant
+
 jdk:
   - openjdk11
 cache:
