@@ -1,5 +1,6 @@
 dist: xenial
-language: java    
+language: java
+install: ant deps
 jdk:
   - openjdk11
 cache:
