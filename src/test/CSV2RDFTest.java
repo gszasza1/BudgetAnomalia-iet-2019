@@ -23,7 +23,7 @@ public class CSV2RDFTest {
         char temp=test.toChar("a");
 
         //Assert
-        assertEquals("a", temp);
+        assertEquals('a', temp);
 
     }
 }
