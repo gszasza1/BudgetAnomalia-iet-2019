@@ -1,8 +1,8 @@
-dist: xenial
 language: java
 before_install: 
   - sudo apt-get install ant
+
 script: ant clean dist
 
 jdk:
-  - openjdk11
+  - openjdk8
