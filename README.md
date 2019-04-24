@@ -9,8 +9,8 @@
 ## csv2rdf
 Integracios Ellenorzesi Technikak Homework
 iet-2019 created for BudgetAnomalia
-##  Eredeti repo: <https://github.com/clarkparsia/csv2rdf>
-##  Tagok
+## Eredeti repo: <https://github.com/clarkparsia/csv2rdf>
+## Tagok
 
 🐧  Futó Barnabas
 
