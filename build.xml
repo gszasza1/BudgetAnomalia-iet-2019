@@ -51,7 +51,7 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<javac source="1.6" target="1.6" destdir="${build}" debug="yes" deprecation="yes">
+		<javac includeantruntime="false" source="1.8" target="1.8" destdir="${build}" debug="yes" deprecation="yes">
 			<classpath refid="project.class.path"/>
 			<src path="${src}"/>
 		</javac>
@@ -109,13 +109,10 @@
 	</target>
 
 
-	<target name="junit" depends="clean">
+	<target name="junit" depends="compile">
 		<mkdir dir="${report.dir}"/>
-		<get dest="lib/junit.jar" src="http://search.maven.org/remotecontent?filepath=junit/junit/4.11/junit-4.11.jar"/>
-		<get dest="lib/hamcrest.jar" src="https://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar"/>
 
-
-		<junit printsummary="yes" haltonfailure="no">
+		<junit haltonfailure="yes">
 
 			<classpath refid="test.path" />
 			<classpath location="${build}" />
@@ -123,7 +120,7 @@
 			<classpath location="lib/hamcrest.jar" />
 
 
-			<formatter type="plain" />
+			<formatter type="plain" usefile="false"/>
 			<batchtest fork="yes" todir="${report.dir}">
 				<fileset dir="${test.dir}">
 					<include name="*.java" />

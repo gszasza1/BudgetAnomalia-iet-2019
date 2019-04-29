@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import com.complexible.*;
 
 public class TestMessage {
 
