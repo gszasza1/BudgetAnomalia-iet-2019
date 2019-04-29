@@ -76,7 +76,7 @@ public class CSV2RDF implements Runnable {
 	String escape = String.valueOf(CSVReader.DEFAULT_ESCAPE_CHARACTER);
 
 	@Arguments(required = true, description = "File arguments. The extension of template file and output file determines the RDF format that will be used for them (.ttl = Turtle, .nt = N-Triples, .rdf = RDF/XML)", title = {
-	                "templateFile", "csvFile", "outputFile" })
+			"templateFile", "csvFile", "outputFile" })
 	public List<String> files;
 	private int inputRows = 0;
 	private int outputTriples = 0;
@@ -87,12 +87,12 @@ public class CSV2RDF implements Runnable {
 
 		File templateFile = new File(files.get(0));
 		File inputFile = new File(files.get(1));
-		File outputFile =  new File(files.get(2));
+		File outputFile = new File(files.get(2));
 		System.out.println("CSV to RDF conversion started...");
 		System.out.println("Template: " + templateFile);
 		System.out.println("Input   : " + inputFile);
 		System.out.println("Output  : " + outputFile);
-		
+
 		try {
 			Reader in = Files.newReader(inputFile, INPUT_CHARSET);
 			CSVReader reader = new CSVReader(in, toChar(separator), toChar(quote), toChar(escape));
@@ -118,8 +118,7 @@ public class CSV2RDF implements Runnable {
 			reader.close();
 			in.close();
 			out.close();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		System.out.printf("Converted %,d rows to %,d triples%n", inputRows, outputTriples);
@@ -133,8 +132,8 @@ public class CSV2RDF implements Runnable {
 	private static ParserConfig getParserConfig() {
 		ParserConfig config = new ParserConfig();
 
-		Set<RioSetting<?>> aNonFatalErrors = Sets.<RioSetting<?>> newHashSet(
-		                BasicParserSettings.FAIL_ON_UNKNOWN_DATATYPES, BasicParserSettings.FAIL_ON_UNKNOWN_LANGUAGES);
+		Set<RioSetting<?>> aNonFatalErrors = Sets.<RioSetting<?>>newHashSet(
+				BasicParserSettings.FAIL_ON_UNKNOWN_DATATYPES, BasicParserSettings.FAIL_ON_UNKNOWN_LANGUAGES);
 
 		config.setNonFatalErrors(aNonFatalErrors);
 
@@ -176,21 +175,19 @@ public class CSV2RDF implements Runnable {
 
 		private ValueProvider valueProviderFor(String varName, List<String> cols) throws Exception {
 			if (varName.equalsIgnoreCase("_ROW_")) {
-				return new RowNumberProvider(); 
+				return new RowNumberProvider();
 			}
 			if (varName.equalsIgnoreCase("_UUID_")) {
-				return new UUIDProvider(); 
+				return new UUIDProvider();
 			}
-			
-			int index = -1;			
+
+			int index = -1;
 			if (!noHeader) {
 				index = cols.indexOf(varName);
-			}
-			else {
+			} else {
 				try {
 					index = Integer.parseInt(varName);
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					if (varName.length() == 1) {
 						char c = Character.toUpperCase(varName.charAt(0));
 						if (c >= 'A' && c <= 'Z') {
@@ -237,17 +234,14 @@ public class CSV2RDF implements Runnable {
 					}
 					if (value instanceof BNode) {
 						generator = (ValueGenerator<V>) new BNodeGenerator();
-					}
-					else {
+					} else {
 						String str = value.toString();
 						ValueProvider[] providers = providersFor(str);
 						if (providers.length == 0) {
 							generator = new ConstantValueGenerator(value);
-						}
-						else if (value instanceof URI) {
+						} else if (value instanceof URI) {
 							generator = (ValueGenerator<V>) new TemplateURIGenerator(str, providers);
-						}
-						else {
+						} else {
 							Literal literal = (Literal) value;
 							generator = (ValueGenerator<V>) new TemplateLiteralGenerator(literal, providers);
 						}
@@ -261,8 +255,8 @@ public class CSV2RDF implements Runnable {
 					for (ValueProvider provider : valueProviders) {
 						if (str.contains(provider.placeholder)) {
 							result.add(provider);
-						}  
-                    }
+						}
+					}
 					return result.toArray(new ValueProvider[0]);
 				}
 			});
@@ -299,19 +293,19 @@ public class CSV2RDF implements Runnable {
 	}
 
 	private static abstract class ValueProvider {
-		 private final String placeholder = UUID.randomUUID().toString();
-		 private boolean isHash;
+		private final String placeholder = UUID.randomUUID().toString();
+		private boolean isHash;
 
 		public String provide(int rowIndex, String[] row) {
-			 String value = provideValue(rowIndex, row);
-			 if (value != null && isHash) {
+			String value = provideValue(rowIndex, row);
+			if (value != null && isHash) {
 				HashCode hash = Hashing.sha1().hashString(value, OUTPUT_CHARSET);
 				value = BaseEncoding.base32Hex().omitPadding().lowerCase().encode(hash.asBytes());
-			 }
-			 return value;
-		 }
+			}
+			return value;
+		}
 
-		 protected abstract String provideValue(int rowIndex, String[] row);
+		protected abstract String provideValue(int rowIndex, String[] row);
 	}
 
 	private static class RowValueProvider extends ValueProvider {
@@ -335,7 +329,7 @@ public class CSV2RDF implements Runnable {
 	private static class UUIDProvider extends ValueProvider {
 		private String value = null;
 		private int generatedRow = -1;
-		
+
 		protected String provideValue(int rowIndex, String[] row) {
 			if (value == null || generatedRow != rowIndex) {
 				value = UUID.randomUUID().toString();
@@ -419,17 +413,16 @@ public class CSV2RDF implements Runnable {
 		public Literal generate(int rowIndex, String[] row) {
 			String value = applyTemplate(rowIndex, row);
 			return datatype == null ? lang == null ? FACTORY.createLiteral(value) : FACTORY.createLiteral(value, lang)
-			                : FACTORY.createLiteral(value, datatype);
+					: FACTORY.createLiteral(value, datatype);
 		}
 	}
 
 	public static void main(String[] args) throws Exception {
 		try {
-			Cli.<Runnable> builder("csv2rdf").withDescription("Converts a CSV file to RDF based on a given template")
-			                .withDefaultCommand(CSV2RDF.class).withCommand(CSV2RDF.class).withCommand(Help.class)
-			                .build().parse(args).run();
-		}
-		catch (Exception e) {
+			Cli.<Runnable>builder("csv2rdf").withDescription("Converts a CSV file to RDF based on a given template")
+					.withDefaultCommand(CSV2RDF.class).withCommand(CSV2RDF.class).withCommand(Help.class).build()
+					.parse(args).run();
+		} catch (Exception e) {
 			System.err.println("ERROR: " + e.getMessage());
 			e.printStackTrace();
 		}
