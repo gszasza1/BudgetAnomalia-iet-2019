@@ -109,7 +109,7 @@
 	</target>
 
 
-	<target name="junit" depends="clean,compile">
+	<target name="junit" depends="clean">
 		<mkdir dir="${report.dir}"/>
 		<get dest="lib/junit.jar" src="http://search.maven.org/remotecontent?filepath=junit/junit/4.11/junit-4.11.jar"/>
 		<get dest="lib/hamcrest.jar" src="https://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar"/>
