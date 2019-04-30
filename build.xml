@@ -9,10 +9,8 @@
 	<property name="dist" location="dist"/>
 
 	<!-- test -->
-	<property name="test.dir" location="src/hu/bme/mit/budgetanomalia/test" />
+	<property name="test.dir" location="src" />
 	<property name="report.dir" location="report" />
-	<property name="web.classes.dir" location="${web.dir}/WEB-INF/classes" />
-
 
 
 
@@ -38,7 +36,6 @@
 	<target name="clean" description="Clean up build files">
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
-		<delete dir="${test}"/>
 
 	</target>
 
@@ -116,7 +113,7 @@
 
 		<junit haltonfailure="yes">
 
-			<classpath refid="test.path" />
+			<classpath refid="project.class.path" />
 			<classpath location="${build}" />
 			<classpath location="lib/junit.jar" />
 			<classpath location="lib/hamcrest.jar" />
@@ -125,7 +122,7 @@
 			<formatter type="plain" usefile="false"/>
 			<batchtest fork="yes" todir="${report.dir}">
 				<fileset dir="${test.dir}">
-					<include name="*.java" />
+					<include name="**/*Test*.java" />
 				</fileset>
 			</batchtest>
 
