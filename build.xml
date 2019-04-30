@@ -9,7 +9,7 @@
 	<property name="dist" location="dist"/>
 
 	<!-- test -->
-	<property name="test.dir" location="src/test" />
+	<property name="test.dir" location="src/hu/bme/mit/budgetanomalia/test" />
 	<property name="report.dir" location="report" />
 	<property name="web.classes.dir" location="${web.dir}/WEB-INF/classes" />
 
@@ -111,6 +111,8 @@
 
 	<target name="junit" depends="compile">
 		<mkdir dir="${report.dir}"/>
+		<get dest="lib/junit.jar" src="http://search.maven.org/remotecontent?filepath=junit/junit/4.11/junit-4.11.jar"/>
+		<get dest="lib/hamcrest.jar" src="https://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar"/>
 
 		<junit haltonfailure="yes">
 
