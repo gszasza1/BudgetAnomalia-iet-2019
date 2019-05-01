@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.lang.NullPointerException;
 
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
@@ -81,7 +82,7 @@ public class CSV2RDF implements Runnable {
 	private int inputRows = 0;
 	private int outputTriples = 0;
 
-	public void run() {
+	public void run(){
 		Preconditions.checkArgument(files.size() >= 3, "Missing arguments");
 		Preconditions.checkArgument(files.size() <= 3, "Too many arguments");
 
@@ -120,7 +121,7 @@ public class CSV2RDF implements Runnable {
 			out.close();
 		}
 		catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new NullPointerException(e.toString());
 		}
 		System.out.printf("Converted %,d rows to %,d triples%n", inputRows, outputTriples);
 	}
