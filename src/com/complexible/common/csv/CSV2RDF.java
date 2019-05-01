@@ -20,7 +20,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.lang.NullPointerException;
 
 import org.openrdf.model.BNode;
 import org.openrdf.model.Literal;
@@ -121,7 +120,7 @@ public class CSV2RDF implements Runnable {
 			out.close();
 		}
 		catch (Exception e) {
-			throw new NullPointerException(e.toString());
+			e.printStackTrace();
 		}
 		System.out.printf("Converted %,d rows to %,d triples%n", inputRows, outputTriples);
 	}
