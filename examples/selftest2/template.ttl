@@ -1,0 +1,19 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix gr:      <http://purl.org/goodrelations/v1#> .
+@prefix : <http://example.org/models#> .
+
+
+:Type-${Type} a gr:FurnitureEntity;
+    rdfs:label "${Type}".
+
+:Model-${Type} a gr:ProductModel;
+    rdfs:label "${Material}  ${Type}".
+
+:FactoryName-#{Name} a gr:BusinessName;
+    rdfs:label "${Type}";
+    gr:currentPrice "${Price}".
+
+:price a gr:UnitPriceSpecification ;
+    gr:hasCurrency "USD"^^xsd:string ;
+    gr:hasCurrencyValue "${Price}"^^xsd:float .

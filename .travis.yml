@@ -2,7 +2,7 @@ language: java
 before_install: 
   - sudo apt-get install ant
 
-script: ant clean dist
+script: ant clean dist junit
 
 jdk:
   - openjdk8
