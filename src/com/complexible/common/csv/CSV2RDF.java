@@ -81,7 +81,7 @@ public class CSV2RDF implements Runnable {
 	private int inputRows = 0;
 	private int outputTriples = 0;
 
-	public void run() {
+	public void run(){
 		Preconditions.checkArgument(files.size() >= 3, "Missing arguments");
 		Preconditions.checkArgument(files.size() <= 3, "Too many arguments");
 
@@ -118,8 +118,10 @@ public class CSV2RDF implements Runnable {
 			reader.close();
 			in.close();
 			out.close();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+		}
+		catch (Exception e) {
+			System.err.println("ERROR: " + e.getMessage());
+			e.printStackTrace();
 		}
 		System.out.printf("Converted %,d rows to %,d triples%n", inputRows, outputTriples);
 	}
@@ -417,14 +419,9 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		try {
-			Cli.<Runnable>builder("csv2rdf").withDescription("Converts a CSV file to RDF based on a given template")
-					.withDefaultCommand(CSV2RDF.class).withCommand(CSV2RDF.class).withCommand(Help.class).build()
-					.parse(args).run();
-		} catch (Exception e) {
-			System.err.println("ERROR: " + e.getMessage());
-			e.printStackTrace();
-		}
+	public static void main(String[] args){
+		Cli.<Runnable> builder("csv2rdf").withDescription("Converts a CSV file to RDF based on a given template")
+			                .withDefaultCommand(CSV2RDF.class).withCommand(CSV2RDF.class).withCommand(Help.class)
+			                .build().parse(args).run();
 	}
 }
