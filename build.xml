@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="csv2rdf" default="dist" basedir=".">
+<project name="csv2rdf" default="dist" basedir=".">
 
 	<description>CSV2RDF utility</description>
 
