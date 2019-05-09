@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
-<project name="csv2rdf" default="dist" basedir=".">
+<project name="csv2rdf" default="dist" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
 
 	<description>CSV2RDF utility</description>
+
 
 	<!-- Global Properties -->
 	<property name="src" location="src"/>
@@ -107,8 +108,6 @@
 
 
 	<target name="junit" depends="compile">
-		<mkdir dir="${report.dir}"/>
-
 		<junit haltonfailure="yes">
 
 			<classpath refid="project.class.path" />
@@ -125,6 +124,51 @@
 			</batchtest>
 
 		</junit>
+	</target>
+
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+		<classpath path="lib/jacocoant.jar"/>
+	</taskdef>
+
+	<property name="testdest" location="jacoco"/>
+	<target name="jacoco">
+
+		<jacoco:coverage destfile="jacoco.exec">
+			<junit fork="true" forkmode="once">
+
+				<classpath refid="project.class.path" />
+				<classpath location="${build}" />
+				<classpath location="lib/junit.jar" />
+				<classpath location="lib/hamcrest.jar" />
+
+				<batchtest fork="yes" todir="${report.dir}">
+					<fileset dir="${test.dir}">
+						<include name="**/*Test*.java" />
+					</fileset>
+				</batchtest>
+
+			</junit>
+		</jacoco:coverage>
+
+		<jacoco:report>
+
+			<executiondata>
+				<file file="jacoco.exec"/>
+			</executiondata>
+
+			<structure name="Example Project">
+				<classfiles>
+					<fileset dir="build"/>
+				</classfiles>
+				<sourcefiles encoding="UTF-8">
+					<fileset dir="src"/>
+				</sourcefiles>
+			</structure>
+
+			<html destdir="report"/>
+
+		</jacoco:report>
+
 	</target>
 
 </project>
