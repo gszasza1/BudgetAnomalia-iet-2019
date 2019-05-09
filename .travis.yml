@@ -2,8 +2,9 @@ language: java
 before_install: 
   - sudo apt-get install ant
 
-script: ant clean dist junit jacoco
-
+script:
+  - ant clean dist junit jacoco
+  - mvn test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
