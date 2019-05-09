@@ -6,6 +6,8 @@
 *   ### Codacy [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0283f198f7444bd9b379e649fa6f08ab)](https://app.codacy.com/app/futobarna/BudgetAnomalia-iet-2019?utm_source=github.com&utm_medium=referral&utm_content=BME-MIT-IET/BudgetAnomalia-iet-2019&utm_campaign=Badge_Grade_Dashboard)
 
 ## Tesztelés
+
+*   ### Coveralls [![Coverage Status](https://coveralls.io/repos/github/BME-MIT-IET/BudgetAnomalia-iet-2019/badge.svg)](https://coveralls.io/github/BME-MIT-IET/BudgetAnomalia-iet-2019)
 ## csv2rdf
 Integracios Ellenorzesi Technikak Homework
 iet-2019 created for BudgetAnomalia
