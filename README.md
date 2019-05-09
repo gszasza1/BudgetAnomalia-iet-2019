@@ -7,7 +7,7 @@
 
 ## Tesztelés
 
-*   ### Coveralls [![Coverage Status](https://coveralls.io/repos/github/BME-MIT-IET/BudgetAnomalia-iet-2019/badge.svg)](https://coveralls.io/github/BME-MIT-IET/BudgetAnomalia-iet-2019)
+*   ### Code Coverage [![Netlify Status](https://api.netlify.com/api/v1/badges/9062619f-3605-4c60-a0fe-487fe7906427/deploy-status)](https://app.netlify.com/sites/budgettest/deploys)
 ## csv2rdf
 Integracios Ellenorzesi Technikak Homework
 iet-2019 created for BudgetAnomalia
