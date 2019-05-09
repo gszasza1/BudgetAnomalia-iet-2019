@@ -10,5 +10,5 @@ before_deploy:
   - npm install netlify-cli -g
 deploy:
   provider: script
-  script: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p --dir ./report
+  script: netlify deploy -s $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN -p --dir ./report
   skip_cleanup: true
