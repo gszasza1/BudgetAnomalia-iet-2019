@@ -165,7 +165,7 @@
 				</sourcefiles>
 			</structure>
 
-			<html destdir="report"/>
+			<html destfile="reportfile.zip"/>
 
 		</jacoco:report>
 
