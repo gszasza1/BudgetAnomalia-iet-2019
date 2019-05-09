@@ -1,8 +1,11 @@
 language: java
-before_install: 
-  - sudo apt-get install ant
-
-script: ant clean dist junit
-
 jdk:
   - openjdk8
+before_install: 
+  - sudo apt-get install ant
+script:
+  - ant clean dist junit jacoco
+deploy:
+  provider: script
+  script: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p --dir ./report
+  skip_cleanup: true
