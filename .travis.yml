@@ -4,5 +4,8 @@ before_install:
 
 script: ant clean dist junit jacoco
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
 jdk:
   - openjdk8
