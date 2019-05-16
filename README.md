@@ -7,7 +7,7 @@
 
 ## Tesztelés
 
-*   ### Code Coverage [![Netlify Status](https://api.netlify.com/api/v1/badges/9062619f-3605-4c60-a0fe-487fe7906427/deploy-status)](https://app.netlify.com/sites/budgettest/deploys)
+*   ### Jococo Code Coverage [![Netlify Status](https://api.netlify.com/api/v1/badges/9062619f-3605-4c60-a0fe-487fe7906427/deploy-status)](https://budgettest.netlify.com/)
 ## csv2rdf
 Integracios Ellenorzesi Technikak Homework
 iet-2019 created for BudgetAnomalia
