@@ -6,13 +6,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class TestRowNumberProvider {
 
     @Test
-    public void provideValue_correct() {
+    public void provideValueCorrect() {
         try {
             
             CSV2RDF.RowNumberProvider rowNumberProvider = new CSV2RDF.RowNumberProvider();
