@@ -5,15 +5,20 @@ import io.airlift.command.Cli;
 import io.airlift.command.Help;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
 public class TestNoHeader {
+
     private String templateFile = "examples/noheadertest/template.ttl";
     private String templateFile2 = "examples/noheadertest/template2.ttl";
+    private String invalidTemplate = "examples/noheadertest/templateBadVars.ttl";
+    private String invalidTemplate2 = "examples/noheadertest/templateBadVars2.ttl";
     private String csvFile = "examples/noheadertest/cars.csv";
     private String outputFile = "examples/noheadertest/output.ttl";
     private String outputFile2 = "examples/noheadertest/output2.ttl";
@@ -75,6 +80,26 @@ public class TestNoHeader {
             fail();
         }
         boolean result = containsCarLabel && containsOfferComment && containsPriceValue;
+        assertTrue(result);
+    }
+
+
+
+    @Test
+    public void testInvalidTemplateMultipleLetters(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(outContent));
+        init(invalidTemplate, outputFile);
+        boolean result = outContent.toString().contains("ERROR: Invalid template variable [${BA}]");
+        assertTrue(result);
+    }
+
+    @Test
+    public void testInvalidTemplateInvalidCharacter(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(outContent));
+        init(invalidTemplate2, outputFile);
+        boolean result = outContent.toString().contains("ERROR: Invalid template variable [${]}]");
         assertTrue(result);
     }
 
