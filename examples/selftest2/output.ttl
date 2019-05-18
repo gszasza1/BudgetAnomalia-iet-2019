@@ -1,0 +1,32 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix : <http://example.org/models#> .
+
+:Type-Desk a gr:FurnitureEntity ;
+	rdfs:label "Desk" .
+
+:Model-Desk a gr:ProductModel ;
+	rdfs:label "Wood  Desk" .
+
+:FactoryName-sqp65prlsenvd628p0865e5u0l9uis09 a gr:BusinessName ;
+	rdfs:label "Desk" ;
+	gr:currentPrice "4000.00" .
+
+:price a gr:UnitPriceSpecification ;
+	gr:hasCurrency "USD"^^xsd:string ;
+	gr:hasCurrencyValue "4000.00"^^xsd:float .
+
+:Type-Allat a gr:FurnitureEntity ;
+	rdfs:label "Allat" .
+
+:Model-Allat a gr:ProductModel ;
+	rdfs:label "Hus  Allat" .
+
+:FactoryName-v5ip4tp988421n4v9mc9hc15iita46e7 a gr:BusinessName ;
+	rdfs:label "Allat" ;
+	gr:currentPrice "4052.00" .
+
+:price a gr:UnitPriceSpecification ;
+	gr:hasCurrency "USD"^^xsd:string ;
+	gr:hasCurrencyValue "4052.00"^^xsd:float .

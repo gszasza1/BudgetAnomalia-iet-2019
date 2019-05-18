@@ -6,32 +6,25 @@ import io.airlift.command.Help;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.lang.IllegalArgumentException;
 
 public class TestExceptions {
-    private String templateFile;
-    private String csvFile;
-    private String outputFile;
+    private String templateFile = "examples/cars/cars.ttl";
+    private String csvFile = "examples/cars/cars.csv";
+    private String outputFile = "examples/cars/output.ttl";
+	private String argumentDummy = "examples/cars/cars.ttl";
 
-    private void init(){
+    @Test(expected = IllegalArgumentException.class)
+    public void testTooManyArguments(){
         Cli.<Runnable> builder("csv2rdf").withDescription("Converts a CSV file to RDF based on a given template")
                 .withDefaultCommand(CSV2RDF.class).withCommand(CSV2RDF.class).withCommand(Help.class)
-                .build().parse(templateFile, csvFile, outputFile).run();
+                .build().parse(templateFile, csvFile, outputFile, argumentDummy).run();
     }
 
-    @Test(expected = FileNotFoundException.class)
-    public void testTemplateError(){
-        templateFile = "examples/cars/templatenotexists.ttl";
-        csvFile = "examples/cars/cars.csv";
-        outputFile = "examples/cars/output.ttl";
-        init();
-    }
-
-    @Test(expected = FileNotFoundException.class)
-    public void testCSVFileError(){
-        templateFile = "examples/cars/cars.ttl";
-        csvFile = "examples/cars/notexists.csv";
-        outputFile = "examples/cars/output.ttl";
-        init();
+    @Test(expected = IllegalArgumentException.class)
+    public void testNotEnoughArguments(){
+        Cli.<Runnable> builder("csv2rdf").withDescription("Converts a CSV file to RDF based on a given template")
+                .withDefaultCommand(CSV2RDF.class).withCommand(CSV2RDF.class).withCommand(Help.class)
+                .build().parse(templateFile, csvFile).run();
     }
 }
