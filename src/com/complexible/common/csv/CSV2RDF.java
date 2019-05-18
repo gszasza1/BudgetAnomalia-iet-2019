@@ -54,7 +54,7 @@ import com.google.common.io.Files;
 
 /**
  * Converts a CSV file to RDF based on a given template
- * 
+ *
  * @author Evren Sirin
  */
 @Command(name = "convert", description = "Runs the conversion.")
@@ -148,7 +148,7 @@ public class CSV2RDF implements Runnable {
 		return config;
 	}
 
-	private class Template {
+	public class Template {
 		private List<StatementGenerator> stmts = Lists.newArrayList();
 		private List<ValueProvider> valueProviders = Lists.newArrayList();
 
@@ -275,7 +275,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class StatementGenerator {
+	public static class StatementGenerator {
 		private final ValueGenerator<Resource> subject;
 		private final ValueGenerator<URI> predicate;
 		private final ValueGenerator<Value> object;
@@ -310,7 +310,7 @@ public class CSV2RDF implements Runnable {
 		protected abstract String provideValue(int rowIndex, String[] row);
 	}
 
-	private static class RowValueProvider extends ValueProvider {
+	public static class RowValueProvider extends ValueProvider {
 		private final int colIndex;
 
 		private RowValueProvider(int colIndex) {
@@ -322,13 +322,13 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class RowNumberProvider extends ValueProvider {
+	public static class RowNumberProvider extends ValueProvider {
 		protected String provideValue(int rowIndex, String[] row) {
 			return String.valueOf(rowIndex);
 		}
 	}
 
-	private static class UUIDProvider extends ValueProvider {
+	public static class UUIDProvider extends ValueProvider {
 		private String value = null;
 		private int generatedRow = -1;
 
@@ -341,7 +341,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private interface ValueGenerator<V extends Value> {
+	public interface ValueGenerator<V extends Value> {
 		V generate(int rowIndex, String[] row);
 	}
 
@@ -357,7 +357,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class BNodeGenerator implements ValueGenerator<BNode> {
+	public static class BNodeGenerator implements ValueGenerator<BNode> {
 		private BNode value = null;
 		private int generatedRow = -1;
 
@@ -370,7 +370,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static abstract class TemplateValueGenerator<V extends Value> implements ValueGenerator<V> {
+	public static abstract class TemplateValueGenerator<V extends Value> implements ValueGenerator<V> {
 		private final String template;
 		private final ValueProvider[] providers;
 
@@ -391,7 +391,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class TemplateURIGenerator extends TemplateValueGenerator<URI> {
+	public static class TemplateURIGenerator extends TemplateValueGenerator<URI> {
 		private TemplateURIGenerator(String template, ValueProvider[] providers) {
 			super(template, providers);
 		}
@@ -401,7 +401,7 @@ public class CSV2RDF implements Runnable {
 		}
 	}
 
-	private static class TemplateLiteralGenerator extends TemplateValueGenerator<Literal> {
+	public static class TemplateLiteralGenerator extends TemplateValueGenerator<Literal> {
 		private final URI datatype;
 		private final String lang;
 
