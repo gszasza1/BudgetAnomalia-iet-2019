@@ -6,6 +6,7 @@ import io.airlift.command.Help;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class TestExceptions {
     private String templateFile;
@@ -18,7 +19,7 @@ public class TestExceptions {
                 .build().parse(templateFile, csvFile, outputFile).run();
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = FileNotFoundException.class)
     public void testTemplateError(){
         templateFile = "examples/cars/templatenotexists.ttl";
         csvFile = "examples/cars/cars.csv";
@@ -26,7 +27,7 @@ public class TestExceptions {
         init();
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = FileNotFoundException.class)
     public void testCSVFileError(){
         templateFile = "examples/cars/cars.ttl";
         csvFile = "examples/cars/notexists.csv";
