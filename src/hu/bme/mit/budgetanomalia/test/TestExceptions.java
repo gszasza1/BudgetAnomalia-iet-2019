@@ -7,15 +7,11 @@ import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
-import java.lang.IllegalArgumentException;
-
 public class TestExceptions {
     private String templateFile = "examples/cars/cars.ttl";
     private String csvFile = "examples/cars/cars.csv";
     private String outputFile = "examples/cars/output.ttl";
 	private String argumentDummy = "examples/cars/cars.ttl";
-	private String fileDoesNotExist = "examples/cars/error.ttl";
-	private String separator = "dummy";
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
