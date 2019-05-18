@@ -17,15 +17,15 @@ public class TestRowNumberProvider {
             
             CSV2RDF.RowNumberProvider rowNumberProvider = new CSV2RDF.RowNumberProvider();
 
-            Class[] argClasses = new Class[2];
-            argClasses[0] = int.class;
-            argClasses[1] = String[].class;
+            Class[] paramClasses = new Class[2];
+            paramClasses[0] = int.class;
+            paramClasses[1] = String[].class;
 
             String[] strings = { "one", "two", "three" };
             String value = String.valueOf(0);
 
             @SuppressWarnings("JavaReflectionMemberAccess")
-            Method method = CSV2RDF.RowNumberProvider.class.getDeclaredMethod("provideValue", argClasses);
+            Method method = CSV2RDF.RowNumberProvider.class.getDeclaredMethod("provideValue", paramClasses);
             method.setAccessible(true);
 
             @SuppressWarnings("JavaReflectionInvocation")
@@ -36,7 +36,8 @@ public class TestRowNumberProvider {
 
 
         } catch (Exception e) {
-            //TODO valamit ide írni
+            // Mindig ide jut
+            System.out.println("Not gone to the function body. It got exception");
         }
 
     }
