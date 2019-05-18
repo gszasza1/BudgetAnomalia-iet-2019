@@ -14,6 +14,7 @@ import java.util.Scanner;
 import static org.junit.Assert.*;
 
 public class TestNoHeader {
+
     private String templateFile = "examples/noheadertest/template.ttl";
     private String templateFile2 = "examples/noheadertest/template2.ttl";
     private String invalidTemplate = "examples/noheadertest/templateBadVars.ttl";
